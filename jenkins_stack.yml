@@ -2,12 +2,13 @@ version: '3.7'
 services:
   jenkins:
     image: jenkins/jenkins:lts-jdk11
+    hostname: jenkins
     environment:
-      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false -Dhudson.footerURL=http://jenkins:8080 
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false -Dhudson.footerURL=http://127.0.0.1:8080 
       - JENKINS_USER=data-info
       - JENKINS_PASS=80925b13
     ports:
-      - 8080:8080
+    #   - 8080:8080
       - 50000:50000
     volumes:
       - jenkins_data:/var/jenkins_home
@@ -19,7 +20,22 @@ services:
       replicas: 1
       placement:
         constraints: [node.platform.os == linux]
-     
+
+  nginx:
+    image: nginx:1.19.5
+    hostname: nginx
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./config/nginx.passwd:/etc/nginx/nginx.passwd
+    ports:
+      - "8080:8080"
+
+    networks:
+      - jenkins-net
+    deploy:
+      mode: replicated
+      replicas: 1
+      
 
 volumes:
   jenkins_data:
