@@ -4,7 +4,7 @@ services:
     image: jenkins/jenkins:lts-jdk11
     hostname: jenkins
     environment:
-      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false -Dhudson.footerURL=http://127.0.0.1:8080 
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false -Dhudson.footerURL=http://0.0.0.0:8080 
       - JENKINS_USER=data-info
       - JENKINS_PASS=80925b13
     command: jenkins-plugin-cli --plugins docker-plugin:1.2.6  
