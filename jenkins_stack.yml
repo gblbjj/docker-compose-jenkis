@@ -9,7 +9,7 @@ services:
       - JENKINS_PASS=80925b13
     command: jenkins-plugin-cli --plugins docker-plugin:1.2.6  
     ports:
-      - 8080:8080
+      - 9091:8080
       - 50000:50000
     volumes:
       - jenkins_data:/var/jenkins_home
