@@ -9,7 +9,7 @@ services:
       - JENKINS_PASS=80925b13
     command: jenkins-plugin-cli --plugins docker-plugin:1.2.6  
     ports:
-    #   - 8080:8080
+      - 8080:8080
       - 50000:50000
     volumes:
       - jenkins_data:/var/jenkins_home
@@ -22,20 +22,20 @@ services:
       placement:
         constraints: [node.platform.os == linux]
 
-  nginx:
-    image: nginx:1.19.5
-    hostname: nginx
-    volumes:
-      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./config/nginx.passwd:/etc/nginx/nginx.passwd
-    ports:
-      - "8080:8080"
+  # nginx:
+  #   image: nginx:1.19.5
+  #   hostname: nginx
+  #   volumes:
+  #     - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+  #     - ./config/nginx.passwd:/etc/nginx/nginx.passwd
+  #   ports:
+  #     - "8080:8080"
 
-    networks:
-      - jenkins-net
-    deploy:
-      mode: replicated
-      replicas: 1
+  #   networks:
+  #     - jenkins-net
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 1
       
 
 volumes:
