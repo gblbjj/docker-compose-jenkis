@@ -1,14 +1,14 @@
 version: '3.7'
 services:
   jenkins:
-    image: yallalabs/jenkins:centos
+    image: jenkins/jenkins:lts-jdk11
     hostname: jenkins
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false -Dhudson.footerURL=http://0.0.0.0:8080 
       - JENKINS_USER=data-info
       - JENKINS_PASS=80925b13 
     ports:
-      - 9091:8080
+      - 8080:8080
       - 50000:50000
     volumes:
       - jenkins_data:/var/jenkins_home
